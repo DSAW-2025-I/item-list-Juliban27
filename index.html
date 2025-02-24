@@ -8,41 +8,58 @@
     <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
     <title>Tailwind | Product List With Cart</title>
   </head>
-  <body class="bg-white p-5 flex">
+  <body class="bg-white p-5 flex flex-col lg:flex-row relative">
 
-      
-    <main class="w-[80%] p-6">
+    <!-- Botón para abrir el carrito en mobile -->
+    <button onclick="toggleCarrito()" class="fixed top-4 right-4 bg-orange-700 text-white p-3 rounded-full lg:hidden z-50">
+      🛒
+    </button>
+
+    <!-- Contenedor principal -->
+    <main class="w-full lg:w-[80%] p-6">
       <h1 class="font-bold text-3xl mb-10">Desserts</h1>
       <section id="product-grid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-        
+        <!-- Aquí se renderizan los productos -->
       </section>
     </main>
 
+    <!-- ASIDE - Carrito de compras (Responsive) -->
+    <aside id="carrito" class="w-full lg:w-[20%] h-screen fixed right-0 top-0 bg-white shadow-lg p-6 overflow-y-auto z-50 transform translate-x-full lg:translate-x-0 transition-transform">
+      <!-- Botón para cerrar en mobile -->
+      <button onclick="toggleCarrito()" class="absolute top-4 right-4 text-gray-600 text-xl lg:hidden">
+        ✖
+      </button>
 
-    <aside class=" w-[20%] h-screen fixed right-0 top-0  bg-white shadow-lg p-6 overflow-y-auto z-50">
       <h2 class="text-xl font-semibold mb-4">
         Your Cart (<span id="total-items">0</span>)
       </h2>
       <ul id="lista-carrito" class="space-y-4"></ul>
 
       <section class="border-t pt-4 mt-4">
-        <div class="flex justify-around content-around">
+        <div class="flex justify-between">
           <p class="text-lg font-semibold">Order Total:</p>
           <p><span id="total-precio">$0.00</span></p>
         </div>
 
         <section class="bg-orange-100/30 text-xs p-2 mt-4 rounded-4xl text-center">
-          This is a <strong>carbon-neutral </strong>delivery
+          This is a <strong>carbon-neutral</strong> delivery
         </section>
+
         <button onclick="ejecutarCompra()" 
-            class="w-full mt-3 bg-orange-700 text-white px-4 py-2 rounded-4xl hover:bg-orange-900 transition ">
-            Confirm Order
+          class="w-full mt-3 bg-orange-700 text-white px-4 py-2 rounded-4xl hover:bg-orange-900 transition">
+          Confirm Order
         </button>
-    </section>
+      </section>
     </aside>
 
+    <script>
+      // 📌 Función para abrir/cerrar el carrito en mobile
+      function toggleCarrito() {
+        const carrito = document.getElementById("carrito");
+        carrito.classList.toggle("translate-x-full");
+      }
+    </script>
 
-
-  <script src="scripts.js"></script>
+    <script src="scripts.js"></script>
   </body>
 </html>
