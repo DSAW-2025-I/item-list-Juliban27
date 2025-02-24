@@ -1,74 +1,65 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- displays site properly based on user's device -->
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" sizes="32x32" href="./images/favicon-32x32.png">
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
+    <title>Tailwind | Product List With Cart</title>
+  </head>
+  <body class="bg-white p-5 flex flex-col lg:flex-row relative">
 
-  <link rel="icon" type="image/png" sizes="32x32" href="./assets/images/favicon-32x32.png">
-  
-  <title>Frontend Mentor | Product list with cart</title>
+    <!-- Botón para abrir el carrito en mobile -->
+    <button onclick="toggleCarrito()" class="fixed top-4 right-4 bg-orange-700 text-white p-3 rounded-full lg:hidden z-50">
+      🛒
+    </button>
 
-  <!-- Feel free to remove these styles or customise in your own stylesheet 👍 -->
-  <style>
-    .attribution { font-size: 11px; text-align: center; }
-    .attribution a { color: hsl(228, 45%, 44%); }
-  </style>
-</head>
-<body>
+    <!-- Contenedor principal -->
+    <main class="w-full lg:w-[80%] p-6">
+      <h1 class="font-bold text-3xl mb-10">Desserts</h1>
+      <section id="product-grid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+        <!-- Aquí se renderizan los productos -->
+      </section>
+    </main>
 
-  Desserts
+    <!-- ASIDE - Carrito de compras (Responsive) -->
+    <aside id="carrito" class="w-full lg:w-[20%] h-screen fixed right-0 top-0 bg-white shadow-lg p-6 overflow-y-auto z-50 transform translate-x-full lg:translate-x-0 transition-transform">
+      <!-- Botón para cerrar en mobile -->
+      <button onclick="toggleCarrito()" class="absolute top-4 right-4 text-gray-600 text-xl lg:hidden">
+        ✖
+      </button>
 
-  Waffle with Berries
-  Waffle
-  6.50
-  Add to Cart
+      <h2 class="text-xl font-semibold mb-4">
+        Your Cart (<span id="total-items">0</span>)
+      </h2>
+      <ul id="lista-carrito" class="space-y-4"></ul>
 
-  Vanilla Bean Crème Brûlée
-  Crème Brûlée
-  7.00
-  Add to Cart
+      <section class="border-t pt-4 mt-4">
+        <div class="flex justify-between">
+          <p class="text-lg font-semibold">Order Total:</p>
+          <p><span id="total-precio">$0.00</span></p>
+        </div>
 
-  Macaron Mix of Five
-  Macaron
-  8.00
-  Add to Cart
+        <section class="bg-orange-100/30 text-xs p-2 mt-4 rounded-4xl text-center">
+          This is a <strong>carbon-neutral</strong> delivery
+        </section>
 
-  Classic Tiramisu
-  Tiramisu
-  5.50
-  Add to Cart
+        <button onclick="ejecutarCompra()" 
+          class="w-full mt-3 bg-orange-700 text-white px-4 py-2 rounded-4xl hover:bg-orange-900 transition">
+          Confirm Order
+        </button>
+      </section>
+    </aside>
 
-  Pistachio Baklava
-  Baklava
-  4.00
-  Add to Cart
+    <script>
+      // 📌 Función para abrir/cerrar el carrito en mobile
+      function toggleCarrito() {
+        const carrito = document.getElementById("carrito");
+        carrito.classList.toggle("translate-x-full");
+      }
+    </script>
 
-  Lemon Meringue Pie
-  Pie
-  5.00
-  Add to Cart
-
-  Red Velvet Cake
-  Cake
-  4.50
-  Add to Cart
-
-  Salted Caramel Brownie
-  Brownie
-  4.50
-  Add to Cart
-
-  Vanilla Panna Cotta
-  Panna Cotta
-  6.50
-  Add to Cart
-
-  Your Cart (<!-- Quantity -->)
-  Your added items will appear here
-
-  <div class="attribution">
-    Challenge by <a href="https://www.frontendmentor.io?ref=challenge">Frontend Mentor</a>. 
-    Coded by <a href="#">Your Name Here</a>.
-  </div>
-</body>
+    <script src="scripts.js"></script>
+  </body>
 </html>
